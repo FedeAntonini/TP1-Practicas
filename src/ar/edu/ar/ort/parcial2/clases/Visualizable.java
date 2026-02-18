@@ -10,6 +10,6 @@ public interface Visualizable {
 	public static final String MSG_TIPO_IMPRESION = "Sellos vendidos según impresión: %d Hueco - %d Lito - %d Tipo - %d Foto - %d Troque\n";
 	public static final String MSG_RECAUDACION_TOTAL = "Recaudación al cierre: $%.2f\n";
 	public static final String MSG_VENTAS_CRITICAS = "Ventas en franja Crítica. Cierre de ventas";
-	public static final String ERROR_VALOR_FACIAL = "Valor facial fuera del rango aceptable";
+	
 	public void verDatos();
 }

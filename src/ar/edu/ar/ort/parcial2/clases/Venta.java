@@ -1,6 +1,6 @@
 package ar.edu.ar.ort.parcial2.clases;
 
-public class Venta implements Visualizable{
+public class Venta{
 	
 	private Sello sello;
 	private int credencial;
@@ -13,17 +13,8 @@ public class Venta implements Visualizable{
 	}
 
 	
-	
-	@Override
-	public void verDatos() {
-		// TODO Auto-generated method stub
-		System.out.println("Sello: " + this.sello +" Comprador: " + this.credencial +" Contacto: " + this.contacto);
-	} 
-	
-	
-	
-	
-	
+	//COMPLETAR metodos 
+
 	
 	
 }
