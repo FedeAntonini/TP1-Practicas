@@ -1,75 +1,97 @@
 package ar.edu.ar.ort.parcial2.clases;
 
-public class Reserva implements Tarifable {
-	
-	private static final String MSG_CLIENTE_INVALIDO = "El cliente no puede ser nulo.";
-	private static final String MSG_FECHA_INVALIADA = "La fecha de inicio no puede ser nula o vacía.";
-	private static final String MSG_NOCHE_INVALIADA = "La cantidad de noches debe ser mayor a 0.";
+import ar.edu.ort.tp1.tdas.implementaciones.PilaNodos;
 
-	private static final String FORMATO_RESERVA = "[Reserva] Cliente DNI: %d | %s | Habitación ID: %d | Fecha Inicio: %s | Noches: %d | Costo Total: %.2f \n";
-
-    private Cliente cliente;
-    private Habitacion habitacion;
-    private String fechaInicio;
-    private int noches;
-
-    public Reserva(Cliente cliente, Habitacion habitacion, String fechaInicio, int noches) {
-        setCliente(cliente);
-        setHabitacion(habitacion);
-        setFechaInicio(fechaInicio);
-        setNoches(noches);
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    private void setCliente(Cliente cliente) {
-        if (cliente == null) {
-            throw new IllegalArgumentException(MSG_CLIENTE_INVALIDO);
-        }
-        this.cliente = cliente;
-    }
-
-    public Habitacion getHabitacion() {
-        return habitacion;
-    }
-
-    public void setHabitacion(Habitacion habitacion) {
-        if (habitacion == null) {
-            throw new IllegalArgumentException("La habitación no puede ser nula.");
-        }
-        this.habitacion = habitacion;
-    }
-
-    public String getFechaInicio() {
-        return fechaInicio;
-    }
-
-    private void setFechaInicio(String fechaInicio) {
-        if (fechaInicio == null || fechaInicio.isEmpty()) {
-            throw new IllegalArgumentException(MSG_FECHA_INVALIADA);
-        }
-        this.fechaInicio = fechaInicio;
-    }
-
-    public int getNoches() {
-        return noches;
-    }
-
-    private void setNoches(int noches) {
-        if (noches <= 0) {
-            throw new IllegalArgumentException(MSG_NOCHE_INVALIADA);
-        }
-        this.noches = noches;
-    }
-
-    @Override
-    public float calcularTarifa() {
-        return habitacion.getTarifaPorNoche() * noches;
-    }
+public class Hotel {
+    private static final String MSG_RESERVA_ADICIONAL = "La reserva sin servicio adicional solo está permitida para Suite y Suite Presidencial.";
+	private static final String MSG_SIN_HABITACION_DISPONIBLE = "No hay habitaciones disponibles del tipo solicitado.";
+	private static final String MSG_CLIENTE_NO_ENCONTRADO = "Cliente no encontrado.";
     
-    public void mostrar() {
-        System.out.printf(FORMATO_RESERVA, cliente.getDni(), habitacion.getClass().getSimpleName(), habitacion.getId(), fechaInicio, noches, calcularTarifa());
+	private static final int PISO_PRESIDENCIAL = 2;
+	private static final int PISO_SUITE = 1;
+	private static final int PISO_ESTANDAR = 0;
+	
+	private static final String FORMATO_SALIDA = "Reservas por Tipo de Habitación:%nEstándar: %d%nSuite: %d%nSuite Presidencial: %d%n";
+	
+	private static final int PISOS = 3;
+    private static final int HABITACIONES_POR_PISO = 5;
+    
+
+    public Hotel() {
+
+        // Inicializar las habitaciones del hotel
+        inicializarHabitaciones();
+    }
+
+    private void inicializarHabitaciones() {
+        int id = 1;
+
+        int pisoEstandar = determinarPisoPorTipoHabitacion("Estándar");
+        for (int i = 0; i < HABITACIONES_POR_PISO; i++) {
+        	// COMPLETAR
+        }
+
+        // Asignar habitaciones Suite
+        int pisoSuite = determinarPisoPorTipoHabitacion("Suite");
+        for (int i = 0; i < HABITACIONES_POR_PISO; i++) {
+            // COMPLETAR: Asumiendo desayuno incluido por defecto
+        }
+
+        // Asignar habitaciones Suite Presidencial
+        int pisoSuitePresidencial = determinarPisoPorTipoHabitacion("Suite Presidencial");
+        for (int i = 0; i < HABITACIONES_POR_PISO; i++) {
+        	// COMPLETAR: Asumiendo 2 habitaciones por defecto
+        }
+    }
+
+    public void agregarCliente(Cliente cliente) {
+    	// COMPLETAR 
+    }
+
+    public void procesarReserva(int clienteDni, String tipoHabitacion, String fechaInicio, int noches) throws IllegalArgumentException {   
+    	// COMPLETAR
+    }
+
+    public void procesarReserva(int clienteDni, String tipoHabitacion, String fechaInicio, int noches, ServicioAdicional servicioAdicional) throws IllegalArgumentException {
+    	// COMPLETAR
+    	
+        System.out.println("Reserva realizada con éxito para el cliente DNI: " + clienteDni + " con servicio adicional: " + servicioAdicional);
+    }
+
+    private void actualizarReservasPorTipoHabitacion(Habitacion habitacion) {
+      
+    }
+
+    private Cliente buscarClientePorDni(int dni) {
+        // COMPLETAR
+
+		return null;
+    }
+
+    private Habitacion buscarHabitacionDisponible(String tipoHabitacion, ServicioAdicional servicioAdicional) {
+    	// COMPLETAR
+
+		return null;
+    }
+
+    private int determinarPisoPorTipoHabitacion(String tipoHabitacion) {
+        switch (tipoHabitacion) {
+            case "Estándar":
+                return PISO_ESTANDAR;
+            case "Suite":
+                return PISO_SUITE;
+            case "Suite Presidencial":
+                return PISO_PRESIDENCIAL;
+            default:
+                return -1; // Tipo de habitación inválido
+        }
+    }
+
+    public void mostrarHistorialReservas() {
+    	// COMPLETAR
+    }
+
+    public void mostrarReservasPorTipoHabitacion() {
+    	// COMPLETAR
     }
 }

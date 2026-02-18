@@ -1,18 +1,16 @@
 package ar.edu.ar.ort.parcial2.clases;
 
-public enum ServicioAdicional {
-    DESAYUNO(20),
-    SPA(50),
-    GIMNASIO(30),
-    WIFI(10);
+import ar.edu.ort.tp1.tdas.implementaciones.ListaOrdenadaNodos;
 
-    private final float costoExtra;
+public class ListaClientesOrdenadaPorId extends ListaOrdenadaNodos<Integer, Cliente> {
 
-    ServicioAdicional(float costoExtra) {
-        this.costoExtra = costoExtra;
+    @Override
+    public int compare(Cliente cliente1, Cliente cliente2) {
+        return cliente1.compareTo(cliente2);
     }
 
-    public float getCostoExtra() {
-        return costoExtra;
+    @Override
+    public int compareByKey(Integer key, Cliente cliente) {
+        return Integer.compare(key, cliente.getDni());
     }
 }

@@ -1,2 +1,2 @@
 eclipse.preferences.version=1
-encoding/<project>=UTF-8
+org.eclipse.jdt.ui.text.custom_code_templates=

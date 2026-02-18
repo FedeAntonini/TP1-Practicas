@@ -1,33 +1,75 @@
 package ar.edu.ar.ort.parcial2.clases;
 
-public class Suite extends Habitacion {
-	private static final String FORMATO_SUITE = "Tipo: Suite | Servicio Adicional: %s";
+public class Reserva implements Tarifable {
+	
+	private static final String MSG_CLIENTE_INVALIDO = "El cliente no puede ser nulo.";
+	private static final String MSG_FECHA_INVALIADA = "La fecha de inicio no puede ser nula o vacía.";
+	private static final String MSG_NOCHE_INVALIADA = "La cantidad de noches debe ser mayor a 0.";
 
-    private static final float COSTO_BASE = 150.0f;
-    private static final int CAPACIDAD = 4;
-    private ServicioAdicional servicioAdicional;
+	private static final String FORMATO_RESERVA = "[Reserva] Cliente DNI: %d | %s | Habitación ID: %d | Fecha Inicio: %s | Noches: %d | Costo Total: %.2f \n";
 
-    public Suite(int id, EstadoHabitacion estado, ServicioAdicional servicioAdicional) {
-        super(id, estado, CAPACIDAD, COSTO_BASE);
-        this.servicioAdicional = servicioAdicional;
+    private Cliente cliente;
+    private Habitacion habitacion;
+    private String fechaInicio;
+    private int noches;
+
+    public Reserva(Cliente cliente, Habitacion habitacion, String fechaInicio, int noches) {
+        setCliente(cliente);
+        setHabitacion(habitacion);
+        setFechaInicio(fechaInicio);
+        setNoches(noches);
     }
 
-    public ServicioAdicional getServicioAdicional() {
-        return servicioAdicional;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setServicioAdicional(ServicioAdicional servicioAdicional) {
-        this.servicioAdicional = servicioAdicional;
+    private void setCliente(Cliente cliente) {
+        if (cliente == null) {
+            throw new IllegalArgumentException(MSG_CLIENTE_INVALIDO);
+        }
+        this.cliente = cliente;
     }
-    
+
+    public Habitacion getHabitacion() {
+        return habitacion;
+    }
+
+    public void setHabitacion(Habitacion habitacion) {
+        if (habitacion == null) {
+            throw new IllegalArgumentException("La habitación no puede ser nula.");
+        }
+        this.habitacion = habitacion;
+    }
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    private void setFechaInicio(String fechaInicio) {
+        if (fechaInicio == null || fechaInicio.isEmpty()) {
+            throw new IllegalArgumentException(MSG_FECHA_INVALIADA);
+        }
+        this.fechaInicio = fechaInicio;
+    }
+
+    public int getNoches() {
+        return noches;
+    }
+
+    private void setNoches(int noches) {
+        if (noches <= 0) {
+            throw new IllegalArgumentException(MSG_NOCHE_INVALIADA);
+        }
+        this.noches = noches;
+    }
+
     @Override
     public float calcularTarifa() {
-        return super.calcularTarifa() + (servicioAdicional != null ? servicioAdicional.getCostoExtra() : 0);
+        return habitacion.getTarifaPorNoche() * noches;
     }
-
-    @Override
+    
     public void mostrar() {
-        super.mostrar();
-        System.out.printf(FORMATO_SUITE, servicioAdicional);
+        System.out.printf(FORMATO_RESERVA, cliente.getDni(), habitacion.getClass().getSimpleName(), habitacion.getId(), fechaInicio, noches, calcularTarifa());
     }
 }

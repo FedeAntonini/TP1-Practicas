@@ -1,16 +1,32 @@
 package ar.edu.ar.ort.parcial2.clases;
 
-import ar.edu.ort.tp1.tdas.implementaciones.ListaOrdenadaNodos;
+public abstract class Habitacion implements Tarifable {
+	
+	private static final String MSG_TARIFA_INVALIDO = "La tarifa por noche debe ser mayor a 0.";
+	private static final String MSG_CAPACIDAD_INVALIDO = "La capacidad debe ser mayor a 0.";
+	private static final String MSG_ESTADO_INVALIDO = "Estado inválido.";
+	private static final String MSG_ID_INVALIDO = "El ID no puede ser negativo.";
+	
+	private static final String FORMATO_HABITACION = "Habitación -- ID: %d | Estado: %s | Capacidad: %d | Tarifa por Noche: %.2f";
 
-public class ListaClientesOrdenadaPorId extends ListaOrdenadaNodos<Integer, Cliente> {
-
-    @Override
-    public int compare(Cliente cliente1, Cliente cliente2) {
-        return cliente1.compareTo(cliente2);
+    public Habitacion(int id, EstadoHabitacion estado, int capacidad, float tarifaPorNoche) {
+   
     }
 
-    @Override
-    public int compareByKey(Integer key, Cliente cliente) {
-        return Integer.compare(key, cliente.getDni());
+
+    public void mostrar() {
+    	// COMPLETAR
     }
+
+
+	public int getTarifaPorNoche() {
+		// COMPLETAR
+		return 0;
+	}
+
+
+	public int getId() {
+		// COMPLETAR
+		return 0;
+	}
 }
